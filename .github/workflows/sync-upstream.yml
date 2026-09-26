@@ -1,0 +1,21 @@
+name: Sync Fork with Upstream
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync with upstream
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh repo sync CyberRhythm/9router \
+            --source decolua/9router \
+            --branch master
